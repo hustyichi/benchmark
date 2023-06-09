@@ -29,17 +29,17 @@ print(len1, len2)
 
 
 for i in range(len1):
-    data_list = [random_with_N_digits(18)]
+    data_list = [random_with_N_digits(18), randint(0, 2)]
     row_list.append(data_list)
 
 row_list2 = sample(row_list, len2)
 for i in range(len2, len1):
-    data_list = [random_with_N_digits(18)]
+    data_list = [random_with_N_digits(18), randint(0, 2)]
     row_list2.append(data_list)
 
 row_list3 = sample(row_list, len4)
 for i in range(len4, len3):
-    data_list = [random_with_N_digits(18)]
+    data_list = [random_with_N_digits(18), randint(0, 2)]
     row_list3.append(data_list)
 
 print(len(row_list2))
@@ -47,15 +47,15 @@ print(len(row_list3))
 
 with open('psi_1.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["id"])
+    writer.writerow(["id", "y"])
     writer.writerows(row_list)
 
 with open('psi_2.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["id"])
+    writer.writerow(["id", "y"])
     writer.writerows(row_list2)
 
 with open('psi_3.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["id"])
+    writer.writerow(["id", "y"])
     writer.writerows(row_list3)
