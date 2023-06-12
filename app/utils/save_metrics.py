@@ -17,7 +17,7 @@ class FileMetrics(object):
 
     def append_monitor_metric(self, memory_usage: int, cpu_usage: float, rss_dict: dict = {}):
         metric = [self.memory_format(memory_usage), str(cpu_usage)]
-        print(f"Memory usage: {self.memory_format(memory_usage)}, cpu usage percent {cpu_usage}")
+        print(f"----------------------------> Memory usage: {self.memory_format(memory_usage)}, cpu usage percent {cpu_usage}")
         for pid, detail in rss_dict.items():
             print(f"Pid {pid}, {detail['cmd']}: {self.memory_format(detail['rss'])}")
 
