@@ -1,17 +1,36 @@
+import argparse
+import enum
+
 from app.utils.monitor import Monitor
 from app.utils.save_metrics import FileMetrics
 
 
-def save_arya_metrics():
-    arya_tags = ["arya", ]
+class Service(enum.Enum):
+    ARYA = "arya"
+    FATE = "fate"
+    SECRET_FLOW = "secret_flow"
+
+
+def save_arya_metrics(service: Service):
+    if service == Service.ARYA:
+        tags = ["arya", ]
+    elif service == Service.FATE:
+        tags = ["fate", ]
+    else:
+        tags = ["ray", ]
+
+    file_metrics = FileMetrics(f"{service.value}_usage.csv")
 
     while True:
-        cpu_usage = Monitor.get_cpu_usage(arya_tags)
-        memory_usage = Monitor.get_memory_usage(arya_tags)
+        cpu_usage = Monitor.get_cpu_usage(tags)
+        memory_usage = Monitor.get_memory_usage(tags)
 
-        file_metrics = FileMetrics("arya_usage.csv")
         file_metrics.append_monitor_metric(memory_usage, cpu_usage)
 
 
 if __name__ == "__main__":
-    save_arya_metrics()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--service', type=Service, default=Service.ARYA, required=False, help="check service")
+
+    args = parser.parse_args()
+    save_arya_metrics(args.service)
