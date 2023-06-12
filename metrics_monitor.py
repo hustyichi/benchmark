@@ -1,5 +1,6 @@
 import argparse
 import enum
+import time
 
 from app.utils.monitor import Monitor
 from app.utils.save_metrics import FileMetrics
@@ -26,7 +27,7 @@ def save_arya_metrics(service: Service):
         memory_usage, rss_dict = Monitor.get_memory_usage(tags)
 
         file_metrics.append_monitor_metric(memory_usage, cpu_usage, rss_dict)
-
+        time.sleep(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
