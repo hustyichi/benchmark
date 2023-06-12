@@ -23,9 +23,9 @@ def save_arya_metrics(service: Service):
 
     while True:
         cpu_usage = Monitor.get_cpu_usage(tags)
-        memory_usage = Monitor.get_memory_usage(tags)
+        memory_usage, rss_dict = Monitor.get_memory_usage(tags)
 
-        file_metrics.append_monitor_metric(memory_usage, cpu_usage)
+        file_metrics.append_monitor_metric(memory_usage, cpu_usage, rss_dict)
 
 
 if __name__ == "__main__":
